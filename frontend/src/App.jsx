@@ -1,18 +1,18 @@
 import { useEffect, useState } from "react";
 import "./App.css";
 import axios from "axios";
+import Navbar from "./components/Navbar";
+import Home from "./pages/Home";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
 function App() {
-  const [data, setData] = useState();
-  async function getData() {
-    const res = await axios.get("http://localhost:3000/getdata");
-    setData(res.data.title);
-  }
-  useEffect(() => {
-    getData();
-  }, []);
   return (
     <>
-      <h1>hello {data}</h1>
+      <BrowserRouter>
+        <Navbar />
+        <Routes>
+          <Route path="/" element={<Home />}></Route>
+        </Routes>
+      </BrowserRouter>
     </>
   );
 }
