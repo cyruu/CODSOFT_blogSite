@@ -3,7 +3,11 @@
 @tailwind components;
 @tailwind utilities;
 
+* {
+  margin: 0;
+  padding: 0;
+}
 .logo {
   font-family: "Paytone One", sans-serif;
-  font-size: 2.5rem;
+  font-size: 3rem;
 }
