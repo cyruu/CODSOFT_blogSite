@@ -57,13 +57,12 @@ router.post("/loginUser", async (req, res) => {
       id: user._id,
       username: user.username,
     };
-    const token = jwt.sign(tokenData, process.env.JWT_SECRET, {
-      expiresIn: "10h",
-    });
+    const token = jwt.sign(tokenData, process.env.JWT_SECRET);
+
     return res
-      .cookie("token", token, { httpOnly: true })
+      .cookie("loginToken", token, { httpOnly: true })
       .status(200)
-      .send({ success: true, message: "Login Success." });
+      .send({ success: true, message: "Login Success.", token });
   } catch (error) {
     console.log(error);
     return res.status(400).send({

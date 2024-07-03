@@ -26,6 +26,7 @@ const Login = () => {
       notify(res.data.message, res.data.success);
 
       if (res.data.success) {
+        window.localStorage.setItem("loginToken", res.data.token);
       }
     } catch (error) {
       console.log(error);
