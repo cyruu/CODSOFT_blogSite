@@ -21,8 +21,8 @@ app.get("/decodeJwtToken", (req, res) => {
   const loginToken = req.cookies.loginToken;
   if (!loginToken) {
     return res
-      .status(400)
-      .send({ success: false, message: "Toknen Not Found" });
+      .status(200)
+      .send({ success: false, message: "Token Not Found", decodedToken: null });
   }
 
   try {

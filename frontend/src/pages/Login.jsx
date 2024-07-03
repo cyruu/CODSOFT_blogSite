@@ -5,8 +5,11 @@ import { Typography, TextField, Button } from "@mui/material";
 import { NavLink } from "react-router-dom";
 import { notify } from "../utils/notify.js";
 import { ToastContainer } from "react-toastify";
+import { setLoggedInUser } from "../redux/authSlice.js";
 import axios from "axios";
+import { useDispatch } from "react-redux";
 const Login = () => {
+  const dis = useDispatch();
   const navigate = useNavigate();
   const [loading, setLoading] = useState(false);
   const { register, handleSubmit, formState } = useForm();
@@ -26,7 +29,12 @@ const Login = () => {
       notify(res.data.message, res.data.success);
 
       if (res.data.success) {
+        const res = await axios.get("http://localhost:3000/decodeJwtToken", {
+          withCredentials: true,
+        });
+        dis(setLoggedInUser({ userData: res.data.decodedToken }));
         window.localStorage.setItem("loginToken", res.data.token);
+        navigate("/");
       }
     } catch (error) {
       console.log(error);

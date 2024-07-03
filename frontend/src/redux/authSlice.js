@@ -25,9 +25,11 @@ const slice = createSlice({
     error: false,
   },
   reducers: {
-    getLoggedInUser: (state, action) => {
-      // return state.loggedInUser;
-      console.log("asdfa", state.loggedInUser);
+    setLoggedInUser: (state, action) => {
+      return {
+        ...state,
+        loggedInUser: action.payload.userData,
+      };
     },
   },
   extraReducers: (builder) => {
@@ -47,5 +49,5 @@ const slice = createSlice({
   },
 });
 
-export const { getLoggedInUser } = slice.actions;
+export const { setLoggedInUser } = slice.actions;
 export default slice.reducer;

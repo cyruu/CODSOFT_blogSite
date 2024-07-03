@@ -72,4 +72,9 @@ router.post("/loginUser", async (req, res) => {
     });
   }
 });
+
+router.get("/logout", (req, res) => {
+  res.clearCookie("loginToken");
+  return res.status(200).send({ success: true, message: "logout success" });
+});
 module.exports = router;
