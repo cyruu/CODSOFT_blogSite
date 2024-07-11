@@ -87,6 +87,7 @@ const Login = () => {
               message: "Enter password",
             },
           })}
+          type="password"
           color={errors.password ? "error" : "primary"}
           id="standard-basic"
           label="Password"

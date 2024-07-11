@@ -1,6 +1,7 @@
 import React, { useEffect } from "react";
 import { NavLink, useNavigate } from "react-router-dom";
 import Search from "./Search";
+import Person4Icon from "@mui/icons-material/Person4";
 import { useDispatch, useSelector } from "react-redux";
 
 import axios from "axios";
@@ -22,7 +23,9 @@ const Navbar = () => {
   }
   return (
     <nav className="h-full flex flex-col items-center justify-between border-[1px] px-10 md:px-14 md:h-16 md:flex-row lg:px-32 flex-row">
-      <div className="logo">Blog</div>
+      <NavLink to="/" className="logo">
+        Blog
+      </NavLink>
       <div className="flex h-full justify-between flex-grow ml-0 lg:ml-20 md:ml-14">
         <ul className="nav-links flex h-full">
           <NavLink
@@ -54,9 +57,12 @@ const Navbar = () => {
               className={({ isActive }) =>
                 `${
                   isActive ? "border-b-4 border-black text-black " : ""
-                } py-2 flex items-center px-4`
+                } py-2 flex items-center pr-4`
               }
             >
+              <Person4Icon
+                sx={{ padding: ".3rem .3rem 0 .3rem", fontSize: "2rem" }}
+              />
               {loggedInUser.username}
             </NavLink>
             <button

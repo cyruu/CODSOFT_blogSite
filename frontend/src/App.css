@@ -11,3 +11,22 @@
   font-family: "Paytone One", sans-serif;
   font-size: 2.5rem;
 }
+.landing {
+  margin-top: 2rem;
+  background: url("./images/landing.png");
+  background-size: cover;
+  background-position: top;
+  position: relative;
+}
+.landingtitle {
+  height: 100%;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: absolute;
+  background: rgba(0, 0, 0, 0.4);
+  font-size: 2.2rem;
+  color: white;
+  font-weight: bold;
+}
