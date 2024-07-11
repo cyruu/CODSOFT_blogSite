@@ -15,20 +15,28 @@ const CreateBlog = () => {
   const { errors } = formState;
   const loggedInUser = useSelector((state) => state.loggedInUser);
   const submit = async (data) => {
-    const blogData = { ...data, blogImage: image };
-    console.log(blogData);
+    const formData = new FormData();
+
+    formData.append("title", data.title);
+    formData.append("introduction", data.introduction);
+    formData.append("description", data.description);
+    formData.append("userId", loggedInUser.id);
+
+    // Append the file
+    formData.append("blogImage", image);
+
     const res = await axios.post(
-      "http://localhost:3000/blogs/createBlog",
-      blogData,
+      `http://localhost:3000/blogs/createBlog`,
+      formData,
       {
         headers: {
           "Content-Type": "multipart/form-data",
         },
       }
     );
-    // if (res.data.success) {
-    //   navigate(`/${loggedInUser.username}`);
-    // }
+    if (res.data.success) {
+      navigate(`/${loggedInUser.username}`);
+    }
   };
   const handleImageChange = (e) => {
     const file = e.target.files[0];
@@ -40,7 +48,7 @@ const CreateBlog = () => {
   };
 
   return (
-    <div className="w-full my-5 mx-auto w-[90%] md:w-[80%]">
+    <div className="w-full my-5 mx-auto w-[90%] px-6 md:w-[80%] p-0">
       <Breadcrumbs aria-label="breadcrumb" sx={{ marginBottom: "1rem" }}>
         <Link
           underline="hover"
@@ -136,7 +144,7 @@ const CreateBlog = () => {
             </div>
             <img
               src={preview || white}
-              // style={{ width: "500px", height: "300px" }}
+              style={{ width: "100%", height: "100%" }}
               className=""
             />
           </label>

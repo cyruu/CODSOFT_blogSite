@@ -24,12 +24,11 @@ const Signup = () => {
       );
       notify(res.data.message, res.data.success);
       if (res.data.success) {
+        navigate("/login");
       }
     } catch (error) {
       console.log(error);
     }
-
-    // const res = await sendEmailVerification();    console.log(res);
   };
   return (
     <div className="h-[89vh] flex items-center justify-center">

@@ -9,10 +9,10 @@ const router = express.Router();
 //blogImage->single ma vako same as schema
 router.post("/createBlog", upload.single("blogImage"), async (req, res) => {
   try {
-    console.log(req.body);
-    const { title, introduction, description, userId, blogImage } = req.body;
-    const image = blogImage?.fieldname;
+    const { title, introduction, description, userId } = req.body;
+    const image = req.file?.fieldname;
     const imagePath = req.file?.path;
+
     // check if exists
     if (!title || !introduction || !description || !image || !imagePath) {
       return res.status(400).send({
@@ -25,6 +25,7 @@ router.post("/createBlog", upload.single("blogImage"), async (req, res) => {
     }
 
     //cloudinary
+
     const { secure_url, public_id } = await uploadImageOnCloudinary(
       imagePath,
       "blogs"
@@ -58,6 +59,24 @@ router.post("/createBlog", upload.single("blogImage"), async (req, res) => {
       message: "Error in addblog api",
       error: error.message,
     });
+  }
+});
+// getmyallpost
+router.post("/getAllMyBlogs", async (req, res) => {
+  const { userId } = req.body;
+  try {
+    const myAllBlogs = await Blog.find({
+      userId: new mongoose.Types.ObjectId(userId),
+    })
+      .populate("userId", "username email")
+      .exec();
+    return res.send({
+      success: true,
+      message: "get all my post success",
+      myAllBlogs,
+    });
+  } catch (error) {
+    return res.status(400).send({ success: false, message: error.message });
   }
 });
 
