@@ -22,7 +22,7 @@ const Navbar = () => {
     }
   }
   return (
-    <nav className="h-full flex flex-col items-center justify-between border-[1px] px-10 md:px-14 md:h-16 md:flex-row lg:px-32 flex-row">
+    <nav className="sticky top-0 z-10 bg-white h-full flex flex-col items-center justify-between border-[1px] px-10 md:px-14 md:h-16 md:flex-row lg:px-32 flex-row">
       <NavLink to="/" className="logo">
         Blog
       </NavLink>
@@ -61,7 +61,7 @@ const Navbar = () => {
               }
             >
               <Person4Icon
-                sx={{ padding: ".3rem .3rem 0 .3rem", fontSize: "2rem" }}
+              // sx={{ padding: ".3rem .3rem 0 .3rem", fontSize: "2rem" }}
               />
               {loggedInUser.username}
             </NavLink>

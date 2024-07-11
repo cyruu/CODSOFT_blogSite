@@ -79,6 +79,7 @@ router.post("/getAllMyBlogs", async (req, res) => {
     return res.status(400).send({ success: false, message: error.message });
   }
 });
+//get featured blogs
 router.get("/getFeaturedBlogs", async (req, res) => {
   try {
     const featuredBlogs = await Blog.aggregate([
@@ -102,5 +103,32 @@ router.get("/getFeaturedBlogs", async (req, res) => {
   }
 });
 //get featured blogs
+router.get("/getRecentBlogs", async (req, res) => {
+  try {
+    const recentBlogs = await Blog.aggregate([
+      {
+        $sort: { createdAt: -1 }, // descending order
+      },
+      {
+        $limit: 6,
+      },
+      {
+        $lookup: {
+          from: "users",
+          localField: "userId",
+          foreignField: "_id",
+          as: "userId",
+        },
+      },
+    ]).exec();
+    return res.send({
+      success: true,
+      message: "get featured blogs success",
+      recentBlogs,
+    });
+  } catch (error) {
+    return res.status(400).send({ success: false, message: error.message });
+  }
+});
 
 export default router;

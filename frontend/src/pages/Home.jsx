@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { Grid } from "@mui/material";
 import FeaturedBlogs from "../components/homepage/FeaturedBlogs";
-import BlogSidebar from "./BlogSidebar";
+import BlogSidebar from "../components/homepage/BlogSidebar";
 
 const Home = () => {
   return (
@@ -10,11 +10,8 @@ const Home = () => {
         <Grid item md={8} sm={12}>
           <FeaturedBlogs />
         </Grid>
-        <Grid item md={3} sm={12}>
+        <Grid item md={4} sm={12}>
           <BlogSidebar />
-        </Grid>
-        <Grid item md={1} sm={12}>
-          {/* <BlogSidebar /> */}
         </Grid>
       </Grid>
     </div>
