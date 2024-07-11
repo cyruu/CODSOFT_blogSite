@@ -1,8 +1,8 @@
-const express = require("express");
+import express from "express";
+import bcryptjs from "bcryptjs";
+import jwt from "jsonwebtoken";
+import User from "../model/UserModel.js";
 const router = express.Router();
-const bcryptjs = require("bcryptjs");
-const jwt = require("jsonwebtoken");
-const User = require("../model/UserModel.js");
 
 router.post("/createUser", async (req, res) => {
   const { username, email, password } = req.body;
@@ -77,4 +77,4 @@ router.get("/logout", (req, res) => {
   res.clearCookie("loginToken");
   return res.status(200).send({ success: true, message: "logout success" });
 });
-module.exports = router;
+export default router;

@@ -8,24 +8,36 @@ import { useSelector } from "react-redux";
 import { useForm } from "react-hook-form";
 import ImageIcon from "@mui/icons-material/Image";
 const CreateBlog = () => {
+  const [preview, setPreview] = useState(null);
+  const [image, setImage] = useState(null);
   const navigate = useNavigate();
-  const [postimg, setPostimg] = useState({ myFile: "" });
   const { register, handleSubmit, formState } = useForm();
   const { errors } = formState;
   const loggedInUser = useSelector((state) => state.loggedInUser);
   const submit = async (data) => {
-    const blogData = { ...data, imagefile: postimg.myFile };
+    const blogData = { ...data, blogImage: image };
+    console.log(blogData);
     const res = await axios.post(
       "http://localhost:3000/blogs/createBlog",
-      blogData
+      blogData,
+      {
+        headers: {
+          "Content-Type": "multipart/form-data",
+        },
+      }
     );
     // if (res.data.success) {
     //   navigate(`/${loggedInUser.username}`);
     // }
   };
-  async function handlefileupload(e) {
-    setPostimg({ ...postimg, myFile: base64 });
-  }
+  const handleImageChange = (e) => {
+    const file = e.target.files[0];
+    setImage(file);
+    if (file) {
+      const previewURL = URL.createObjectURL(file);
+      setPreview(previewURL);
+    }
+  };
 
   return (
     <div className="w-full my-5 mx-auto w-[90%] md:w-[80%]">
@@ -123,24 +135,24 @@ const CreateBlog = () => {
               </div>
             </div>
             <img
-              src={postimg.myFile || white}
+              src={preview || white}
               // style={{ width: "500px", height: "300px" }}
               className=""
             />
           </label>
           <input
-            {...register("imagefile", {
+            {...register("blogImage", {
               required: {
                 value: true,
                 message: "Image is required",
               },
             })}
             type="file"
-            name="myFile"
+            name="blogImage"
             id="fileupload"
             accept=".jpeg, .png, .jpg"
             className="hidden"
-            onChange={(e) => handlefileupload(e)}
+            onChange={handleImageChange}
           />
           {errors.imagefile ? (
             <p className="text-xs mt-1 text-red-600">
@@ -189,11 +201,3 @@ const CreateBlog = () => {
 };
 
 export default CreateBlog;
-const convertToBase64 = (file) => {
-  return new Promise((resolve, reject) => {
-    const reader = new FileReader();
-    reader.readAsDataURL(file);
-    reader.onload = () => resolve(reader.result);
-    reader.onerror = (error) => reject(error);
-  });
-};

@@ -1,59 +1,64 @@
-const express = require("express");
-const router = express.Router();
-const Blog = require("../model/BlogModel.js");
+import express from "express";
+import Blog from "../model/BlogModel.js";
+import { upload } from "../middlewares/multermiddleware.js";
+import { uploadImageOnCloudinary } from "../helpers/cloudinary.js";
+import mongoose from "mongoose";
 
-router.post("/createBlog", async (req, res) => {
+const router = express.Router();
+
+//blogImage->single ma vako same as schema
+router.post("/createBlog", upload.single("blogImage"), async (req, res) => {
   try {
     console.log(req.body);
-    const { title, introduction, description } = req.body;
-    const picture = req.file?.fieldname;
-    const picturePath = req.file?.path;
-
+    const { title, introduction, description, userId, blogImage } = req.body;
+    const image = blogImage?.fieldname;
+    const imagePath = req.file?.path;
     // check if exists
-    if (!title || !introduction || !description || !picture || !picturePath) {
-      return res
-        .status(400)
-        .send({ success: false, message: "All fields are required" });
-    }
-
-    //uploading image on cloudinary
-    const { secure_url, public_id } = await uploadImageOnCloudinary(
-      picturePath,
-      "blog"
-    );
-
-    if (!secure_url) {
+    if (!title || !introduction || !description || !image || !imagePath) {
       return res.status(400).send({
         success: false,
-        message: "Error while uploding image",
-        error: secure_url,
+        message: "All fields are required",
+        title,
+        description,
+        introduction,
       });
     }
 
+    //cloudinary
+    const { secure_url, public_id } = await uploadImageOnCloudinary(
+      imagePath,
+      "blogs"
+    );
+    if (!secure_url) {
+      return res.status(400).send({
+        success: false,
+        message: "Error uploading cloudinary",
+        error: secure_url,
+      });
+    }
     const blog = await Blog.create({
       title,
-      introduction,
       description,
-      user: req.user._id,
-      picture: {
+      introduction,
+      userId: new mongoose.Types.ObjectId(userId),
+      blogImage: {
         secure_url,
         public_id,
       },
     });
 
-    return res.status(201).send({
+    return res.status(200).send({
       success: true,
       message: "Product uploded successfully",
-      product,
+      blog,
     });
   } catch (error) {
-    console.log(`addProductController Error: ${error}`);
     return res.status(400).send({
       success: false,
-      message: "Error in addProductController",
-      error,
+      message: "Error in addblog api",
+      error: error.message,
     });
   }
 });
 
-module.exports = router;
+export default router;

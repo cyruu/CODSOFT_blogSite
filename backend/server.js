@@ -1,13 +1,16 @@
-require("dotenv").config();
-const express = require("express");
+import dotenv from "dotenv";
+dotenv.config();
+
+import express from "express";
 const app = express();
-const cors = require("cors");
-const connect = require("./dbConfig.js");
-const morgan = require("morgan");
-const cookieParser = require("cookie-parser");
-const jwt = require("jsonwebtoken");
-const userRoutes = require("./routes/userRoutes.js");
-const blogRoutes = require("./routes/blogRoutes.js");
+
+import cors from "cors";
+import connect from "./dbConfig.js";
+import morgan from "morgan";
+import cookieParser from "cookie-parser";
+import jwt from "jsonwebtoken";
+import userRoutes from "./routes/userRoutes.js";
+import blogRoutes from "./routes/blogRoutes.js";
 
 //cookie parser
 app.use(cookieParser());

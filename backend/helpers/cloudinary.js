@@ -10,15 +10,15 @@ cloudinary.config({
   api_secret: process.env.CLOUDINARY_API_SECRET,
 });
 
-const uploadImageOnCloudinary = async (filePath, folderName) => {
+const uploadImageOnCloudinary = async (imagePath, folderName) => {
   try {
     // uploading image from server
-    const result = await cloudinary.uploader.upload(filePath, {
+    const result = await cloudinary.uploader.upload(imagePath, {
       folder: folderName,
     });
     // delete image from server
     try {
-      fs.unlinkSync(filePath);
+      fs.unlinkSync(imagePath);
     } catch (error) {
       console.log("Failed to delete from server", error);
     }
