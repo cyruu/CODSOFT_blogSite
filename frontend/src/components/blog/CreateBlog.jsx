@@ -4,7 +4,7 @@ import { Typography, Breadcrumbs, Button, Paper } from "@mui/material";
 import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
 import { useSelector } from "react-redux";
-import imageCompression from "browser-image-compression";
+
 import { useForm } from "react-hook-form";
 import ImageIcon from "@mui/icons-material/Image";
 const CreateBlog = () => {
@@ -19,20 +19,11 @@ const CreateBlog = () => {
       "http://localhost:3000/blogs/createBlog",
       blogData
     );
-    if (res.data.success) {
-      navigate(`/${loggedInUser.username}`);
-    }
+    // if (res.data.success) {
+    //   navigate(`/${loggedInUser.username}`);
+    // }
   };
   async function handlefileupload(e) {
-    const file = e.target.files[0];
-    const options = {
-      maxSizeMB: 1,
-      maxWidthOrHeight: 1920,
-      useWebWorker: true,
-    };
-    const compressedFile = await imageCompression(file, options);
-    const base64 = await convertobase64(compressedFile);
-
     setPostimg({ ...postimg, myFile: base64 });
   }
 
