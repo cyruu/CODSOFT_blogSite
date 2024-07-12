@@ -25,7 +25,9 @@ const FeaturedBlogs = () => {
         <Typography sx={{ fontSize: "1.5rem" }}>Featured Blogs</Typography>
       </div>
       <div className=" hidden landing w-full h-64 mx-auto bg-red-500 md:w-[95%] md:block">
-        <p className="landingtitle">Expand your mind with every post</p>
+        <p className="landingtitle md:text-3xl">
+          Expand your mind with every post
+        </p>
       </div>
       <div className="flex flex-col justify-start gap-8 items-center md:flex-row md:flex-wrap md:gap-12 md:mx-10 my-10">
         {loading ? <p>Loading...</p> : ""}

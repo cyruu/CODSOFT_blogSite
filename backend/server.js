@@ -47,16 +47,13 @@ app.get("/decodeJwtToken", (req, res) => {
   }
 });
 
-app.get("/getdata", (req, res) => {
-  return res.json({ title: "home page" });
-});
-
-app.get("/getimage", (req, res) => {
-  try {
-    Post.find({})
-      .then((data) => res.json(data))
-      .catch((err) => res.json({ err }));
-  } catch (error) {}
+app.get("/search", (req, res) => {
+  const searchQuery = req.query.searchinput;
+  // Process the search query
+  // For example, you can render a search results page or redirect
+  res.send(`Search results for: ${searchQuery}`);
+  // Or if you want to render a specific view
+  // res.render('searchResults', { searchQuery });
 });
 
 app.listen(3000, () => {

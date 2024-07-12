@@ -5,7 +5,7 @@ import BlogSidebar from "../components/homepage/BlogSidebar";
 
 const Home = () => {
   return (
-    <div className="w-[100vw] my-5 lg:w-[80%] md:w-[90%] mx-auto md:my-10">
+    <div className="w-[100vw] my-5 min-h-[90vh] lg:w-[80%] md:w-[90%] mx-auto md:my-10">
       <Grid container className="">
         <Grid item md={8} sm={12}>
           <FeaturedBlogs />

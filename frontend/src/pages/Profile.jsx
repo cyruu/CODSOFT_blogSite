@@ -7,7 +7,7 @@ import AllPosts from "../components/blog/AllPosts";
 const Profile = () => {
   const loggedInUser = useSelector((state) => state.loggedInUser);
   return (
-    <div className="w-full my-5 mx-auto w-[90%]  md:w-[80%]">
+    <div className="w-full my-5 mx-auto w-[90%] min-h-[90vh]  md:w-[80%]">
       <div className="profileheader px-6">
         <Breadcrumbs aria-label="breadcrumb" sx={{ marginBottom: "1rem" }}>
           <Link

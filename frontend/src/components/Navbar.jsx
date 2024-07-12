@@ -1,13 +1,15 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { NavLink, useNavigate } from "react-router-dom";
 import Search from "./Search";
 import Person4Icon from "@mui/icons-material/Person4";
 import { useDispatch, useSelector } from "react-redux";
-
+import SearchIcon from "@mui/icons-material/Search";
 import axios from "axios";
 import { setLoggedInUser } from "../redux/authSlice";
-
+import MoblieSearch from "./MoblieSearch";
+import CloseIcon from "@mui/icons-material/Close";
 const Navbar = () => {
+  const [searchStatus, setSearchStatus] = useState(false);
   const dis = useDispatch();
   const navigate = useNavigate();
   const loggedInUser = useSelector((state) => state.loggedInUser);
@@ -21,13 +23,23 @@ const Navbar = () => {
       navigate("/");
     }
   }
+
   return (
     <nav className="sticky top-0 z-10 bg-white h-full flex flex-col items-center justify-between border-[1px] px-10 md:px-14 md:h-16 md:flex-row lg:px-32 flex-row">
-      <NavLink to="/" className="logo">
-        Blog
-      </NavLink>
-      <div className="flex h-full justify-between flex-grow ml-0 lg:ml-20 md:ml-14">
-        <ul className="nav-links flex h-full">
+      <div className="first flex items-center relative ">
+        <NavLink to="/" className="logo">
+          Blog
+        </NavLink>
+        <button
+          className="absolute left-[180px] p-2 flex md:hidden"
+          onClick={() => setSearchStatus((prev) => !prev)}
+        >
+          <SearchIcon />
+        </button>
+      </div>
+
+      <div className="flex h-full justify-between flex-grow flex-col ml-0 lg:ml-20 md:ml-14 md:flex-row">
+        <ul className="nav-links flex h-full hidden md:flex">
           <NavLink
             to="/"
             className={({ isActive }) =>
@@ -38,26 +50,20 @@ const Navbar = () => {
           >
             Home
           </NavLink>
-          <NavLink
-            to="/blogs"
-            className={({ isActive }) =>
-              `${
-                isActive ? "border-b-4 border-black text-black " : ""
-              } py-2 px-4 flex items-center `
-            }
-          >
-            Blogs
-          </NavLink>
         </ul>
-        <Search />
+
+        <div className="search md:flex">
+          <Search setSearchStatus={setSearchStatus} />
+        </div>
+
         {loggedInUser ? (
-          <ul className="login-links flex h-full">
+          <ul className="login-links flex justify-center h-full">
             <NavLink
               to={`/${loggedInUser.username}`}
               className={({ isActive }) =>
                 `${
                   isActive ? "border-b-4 border-black text-black " : ""
-                } py-2 flex items-center pr-4`
+                } py-2 flex items-center px-2 mr-4 md:pr-4`
               }
             >
               <Person4Icon
@@ -67,13 +73,13 @@ const Navbar = () => {
             </NavLink>
             <button
               onClick={handleLogout}
-              className="py-2 flex items-center px-4 "
+              className="py-2 flex items-center md:px-4 "
             >
               Logout
             </button>
           </ul>
         ) : (
-          <ul className="login-links flex h-full">
+          <ul className="login-links flex justify-center h-full">
             <NavLink
               to="/login"
               className={({ isActive }) =>

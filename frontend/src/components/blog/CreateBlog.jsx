@@ -60,6 +60,25 @@ const CreateBlog = () => {
 
         <Typography color="text.primary">Create a Blog</Typography>
       </Breadcrumbs>
+      <div className="buttons mb-5">
+        <Link to={`/${loggedInUser.username}`}>
+          <Button
+            variant="outlined"
+            color="inherit"
+            sx={{ borderRadius: "50px" }}
+          >
+            All Posts
+          </Button>
+        </Link>
+        <Button
+          disableElevation
+          variant="contained"
+          className="rounded-full"
+          sx={{ borderRadius: "50px", bgcolor: "black", marginLeft: "1rem" }}
+        >
+          Create a Blog
+        </Button>
+      </div>
       {/* main  */}
       <form onSubmit={handleSubmit(submit)}>
         {/* title */}
