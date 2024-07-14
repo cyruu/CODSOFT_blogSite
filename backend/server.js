@@ -20,6 +20,9 @@ app.use(cors({ origin: process.env.SERVER_ORIGIN, credentials: true }));
 app.use(morgan("dev"));
 
 connect();
+app.get("/", (req, res) => {
+  res.send({ adsf: "adf" });
+});
 //users
 app.use("/users", userRoutes);
 //blogs
