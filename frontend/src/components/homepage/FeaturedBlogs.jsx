@@ -9,7 +9,9 @@ const FeaturedBlogs = () => {
   const [loading, setLoading] = useState(true);
   const getFeaturedBlogs = async () => {
     setLoading(true);
-    const res = await axios.get(`http://localhost:3000/blogs/getFeaturedBlogs`);
+    const res = await axios.get(
+      `${import.meta.env.VITE_SERVER_ORIGIN}/blogs/getFeaturedBlogs`
+    );
 
     setFeaturedBlogs(res.data.featuredBlogs);
 

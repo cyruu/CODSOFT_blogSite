@@ -19,7 +19,7 @@ const Signup = () => {
   const submit = async (data) => {
     try {
       const res = await axios.post(
-        "http://localhost:3000/users/createUser",
+        `${import.meta.env.VITE_SERVER_ORIGIN}/users/createUser`,
         data
       );
       notify(res.data.message, res.data.success);

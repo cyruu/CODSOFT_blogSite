@@ -10,9 +10,12 @@ const Search = () => {
   const [loading, setLoading] = useState(true);
   const getSearchBlogs = async () => {
     setLoading(true);
-    const res = await axios.post(`http://localhost:3000/blogs/getSearchBlogs`, {
-      searchInput,
-    });
+    const res = await axios.post(
+      `${import.meta.env.VITE_SERVER_ORIGIN}/blogs/getSearchBlogs`,
+      {
+        searchInput,
+      }
+    );
 
     setSearchBlogs(res.data.searchBlogs);
 

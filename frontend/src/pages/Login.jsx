@@ -29,9 +29,12 @@ const Login = () => {
       notify(res.data.message, res.data.success);
 
       if (res.data.success) {
-        const res = await axios.get("http://localhost:3000/decodeJwtToken", {
-          withCredentials: true,
-        });
+        const res = await axios.get(
+          `${import.meta.env.VITE_SERVER_ORIGIN}/decodeJwtToken`,
+          {
+            withCredentials: true,
+          }
+        );
         dis(setLoggedInUser({ userData: res.data.decodedToken }));
         window.localStorage.setItem("loginToken", res.data.token);
         navigate("/");

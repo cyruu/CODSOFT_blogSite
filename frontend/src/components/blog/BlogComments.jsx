@@ -5,9 +5,12 @@ import React, { useEffect, useState } from "react";
 const BlogComments = ({ blogId }) => {
   const [allComments, setAllComments] = useState([]);
   const getComments = async () => {
-    const res = await axios.post("http://localhost:3000/blogs/getComments", {
-      blogId,
-    });
+    const res = await axios.post(
+      `${import.meta.env.VITE_SERVER_ORIGIN}/blogs/getComments`,
+      {
+        blogId,
+      }
+    );
 
     setAllComments(res.data.comments);
   };

@@ -14,10 +14,13 @@ const Navbar = () => {
   const navigate = useNavigate();
   const loggedInUser = useSelector((state) => state.loggedInUser);
   async function handleLogout() {
-    const res = await axios.get("http://localhost:3000/users/logout", {
-      withCredentials: true,
-      headers: { "Content-Type": "application/json" },
-    });
+    const res = await axios.get(
+      `${import.meta.env.VITE_SERVER_ORIGIN}/users/logout`,
+      {
+        withCredentials: true,
+        headers: { "Content-Type": "application/json" },
+      }
+    );
     if (res.data.success) {
       dis(setLoggedInUser({ userData: null }));
       navigate("/");

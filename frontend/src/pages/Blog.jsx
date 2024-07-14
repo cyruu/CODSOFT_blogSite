@@ -25,9 +25,12 @@ const Blog = () => {
   const { errors } = formState;
   const getBlog = async () => {
     setLoading(true);
-    const res = await axios.post("http://localhost:3000/blogs/getBlog", {
-      blogId,
-    });
+    const res = await axios.post(
+      `${import.meta.env.VITE_SERVER_ORIGIN}/blogs/getBlog`,
+      {
+        blogId,
+      }
+    );
     const resData = res.data.blog[0];
     const date = new Date(resData.createdAt);
     const monthName = date.toLocaleString("en-US", { month: "long" });
@@ -45,11 +48,14 @@ const Blog = () => {
     try {
       const { comment } = data;
       const userId = loggedInUser.id;
-      const res = await axios.post("http://localhost:3000/blogs/addComment", {
-        comment,
-        userId,
-        blogId,
-      });
+      const res = await axios.post(
+        `${import.meta.env.VITE_SERVER_ORIGIN}/blogs/addComment`,
+        {
+          comment,
+          userId,
+          blogId,
+        }
+      );
       window.location.reload();
     } catch (error) {
       console.log(error);

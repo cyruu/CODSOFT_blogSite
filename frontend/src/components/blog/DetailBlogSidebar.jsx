@@ -8,7 +8,9 @@ const DetailBlogSidebar = () => {
   const [loading, setLoading] = useState(true);
   const getRecentBlogs = async () => {
     setLoading(true);
-    const res = await axios.get(`http://localhost:3000/blogs/getYouMayLike`);
+    const res = await axios.get(
+      `${import.meta.env.VITE_SERVER_ORIGIN}/blogs/getYouMayLike`
+    );
     setRecentBlogs(res.data.blog);
 
     setLoading(false);

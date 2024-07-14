@@ -7,9 +7,12 @@ const AllPosts = ({ loggedInUser }) => {
   const [loading, setLoading] = useState(true);
   const getMyBlogs = async () => {
     setLoading(true);
-    const res = await axios.post(`http://localhost:3000/blogs/getAllMyBlogs`, {
-      userId: loggedInUser.id,
-    });
+    const res = await axios.post(
+      `${import.meta.env.VITE_SERVER_ORIGIN}/blogs/getAllMyBlogs`,
+      {
+        userId: loggedInUser.id,
+      }
+    );
     setMyBlogs(res.data.myAllBlogs);
     setLoading(false);
   };

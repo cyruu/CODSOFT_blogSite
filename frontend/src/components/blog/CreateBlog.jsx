@@ -26,7 +26,7 @@ const CreateBlog = () => {
     formData.append("blogImage", image);
 
     const res = await axios.post(
-      `http://localhost:3000/blogs/createBlog`,
+      `${import.meta.env.VITE_SERVER_ORIGIN}/blogs/createBlog`,
       formData,
       {
         headers: {
