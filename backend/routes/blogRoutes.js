@@ -1,5 +1,6 @@
 import express from "express";
 import Blog from "../model/BlogModel.js";
+import Comment from "../model/CommentModel.js";
 import { upload } from "../middlewares/multermiddleware.js";
 import { uploadImageOnCloudinary } from "../helpers/cloudinary.js";
 import mongoose from "mongoose";
@@ -211,6 +212,53 @@ router.get("/getYouMayLike", async (req, res) => {
       success: true,
       message: "get you may like blogs success",
       blog,
+    });
+  } catch (error) {
+    return res.status(400).send({ success: false, message: error.message });
+  }
+});
+// add comment to blog
+router.post("/addComment", async (req, res) => {
+  const { blogId, comment, userId } = req.body;
+  console.log(req.body);
+  try {
+    const commentadded = await Comment.create({
+      comment,
+      userId,
+      blogId,
+    });
+    return res.send({
+      success: true,
+      message: "commed added blogs success",
+      commentadded,
+    });
+  } catch (error) {
+    return res.status(400).send({ success: false, message: error.message });
+  }
+});
+// get comment to blog
+router.post("/getcomments", async (req, res) => {
+  const { blogId } = req.body;
+
+  try {
+    const comments = await Comment.aggregate([
+      {
+        $match: { blogId: new mongoose.Types.ObjectId(blogId) }, // Match the blog by its ID
+      },
+      {
+        $lookup: {
+          from: "users", // Collection name in the database
+          localField: "userId",
+          foreignField: "_id",
+          as: "userId",
+        },
+      },
+    ]).exec();
+
+    return res.send({
+      success: true,
+      message: "get all comments blogs success",
+      comments,
     });
   } catch (error) {
     return res.status(400).send({ success: false, message: error.message });
