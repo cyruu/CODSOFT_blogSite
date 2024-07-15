@@ -31,10 +31,7 @@
       "src": "/api/(.*)",
       "dest": "/backend/server.js"
     },
-    {
-      "src": "/search?searchinput=(.*)",
-      "dest": "/backend/server.js"
-    },
+
     {
       "src": "/(.*)",
       "dest": "/frontend/$1"
