@@ -17,7 +17,7 @@ const Login = () => {
   const submit = async (data) => {
     try {
       const res = await axios.post(
-        "http://localhost:3000/users/loginUser",
+        `${import.meta.env.VITE_SERVER_ORIGIN}/users/loginUser`,
         data,
         {
           withCredentials: true,

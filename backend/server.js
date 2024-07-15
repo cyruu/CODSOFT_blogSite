@@ -48,11 +48,12 @@ app.get("/decodeJwtToken", (req, res) => {
   }
 });
 
-app.get("/search", (req, res) => {
-  const searchQuery = req.query.searchinput;
-  // Process the search query
-  // For example, you can render a search results page or redirect
-  res.send(`Search results for: ${searchQuery}`);
+app.post("/blogs/search", (req, res) => {
+  // const searchQuery = req.query.searchinput;
+  const { searchInput } = req.body;
+  res.send({ succcess: true });
+
+  // res.send(`Search results for: ${searchQuery}`);
   // Or if you want to render a specific view
   // res.render('searchResults', { searchQuery });
 });
