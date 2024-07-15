@@ -15,7 +15,9 @@ import blogRoutes from "./routes/blogRoutes.js";
 //cookie parser
 app.use(cookieParser());
 app.use(express.json());
-app.use(cors({ origin: process.env.SERVER_ORIGIN, credentials: true }));
+app.use(
+  cors({ origin: "https://codsoft-blog-site.vercel.app", credentials: true })
+);
 // app.use(cors());
 app.use(morgan("dev"));
 
