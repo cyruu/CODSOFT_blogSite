@@ -39,7 +39,7 @@
     },
     {
       "src": "/search",
-      "destination": "/frontend/src/pages/Search.jsx"
+      "dest": "/frontend/src/pages/Search.jsx"
     }
   ]
 }
