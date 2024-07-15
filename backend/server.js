@@ -48,16 +48,6 @@ app.get("/decodeJwtToken", (req, res) => {
   }
 });
 
-app.post("/blogs/search", (req, res) => {
-  // const searchQuery = req.query.searchinput;
-  const { searchInput } = req.body;
-  res.send({ succcess: true });
-
-  // res.send(`Search results for: ${searchQuery}`);
-  // Or if you want to render a specific view
-  // res.render('searchResults', { searchQuery });
-});
-
 app.listen(3000, () => {
   console.log("server listening at port 3000");
 });
