@@ -15,16 +15,12 @@ import blogRoutes from "./routes/blogRoutes.js";
 //cookie parser
 app.use(cookieParser());
 app.use(express.json());
-app.use(
-  cors({ origin: "https://codsoft-blog-site.vercel.app", credentials: true })
-);
+app.use(cors({ origin: process.env.SERVER_ORIGIN, credentials: true }));
 // app.use(cors());
 app.use(morgan("dev"));
 
 connect();
-app.get("/", (req, res) => {
-  res.send({ adsf: "adf" });
-});
+
 //users
 app.use("/users", userRoutes);
 //blogs
@@ -50,15 +46,6 @@ app.get("/decodeJwtToken", (req, res) => {
       .status(400)
       .send({ success: false, message: "Decode jwt token api failed" });
   }
-});
-
-app.get("/search", (req, res) => {
-  const searchQuery = req.query.searchinput;
-  // Process the search query
-  // For example, you can render a search results page or redirect
-  res.send(`Search results for: ${searchQuery}`);
-  // Or if you want to render a specific view
-  // res.render('searchResults', { searchQuery });
 });
 
 app.listen(3000, () => {
