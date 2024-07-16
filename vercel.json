@@ -36,10 +36,6 @@
     {
       "src": "/(.*)",
       "dest": "/frontend/$1"
-    },
-    {
-      "src": "/search",
-      "dest": "/frontend/src/pages/Search.jsx"
     }
   ]
 }
