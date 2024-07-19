@@ -37,9 +37,7 @@ function App() {
             <Routes>
               <Route path="/" element={<Home />}></Route>
               <Route path="/search" element={<SearchPage />}></Route>
-              <Route path="/test/:searchInput" element={<TestSearch />}></Route>
               <Route path="/blog/:blogId" element={<Blog />}></Route>
-              <Route path="/cyrus" element={<Cyrus />}></Route>
               {/* login garepachi matra access hudaina */}
               <Route element={<PrivateRoute />}>
                 <Route path="/profile/:username" element={<Profile />}></Route>
