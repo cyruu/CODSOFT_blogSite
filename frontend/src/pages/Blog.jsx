@@ -92,7 +92,7 @@ const Blog = () => {
           />
           <BlogComments blogId={blogId} />
           {/* comment form */}
-          <form onSubmit={handleSubmit(submit)}>
+          <form onSubmit={handleSubmit(submit)} className="p-4">
             <Paper className="mb-5 md:p-0" elevation={0}>
               <Typography
                 variant="body1"

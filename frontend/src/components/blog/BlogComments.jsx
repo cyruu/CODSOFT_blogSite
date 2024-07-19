@@ -18,7 +18,7 @@ const BlogComments = ({ blogId }) => {
     getComments();
   }, [blogId]);
   return (
-    <div className="mb-8">
+    <div className="mb-8 px-4">
       <Typography variant="body1" sx={{ fontWeight: "bold", fontSize: "1rem" }}>
         Comments
       </Typography>
