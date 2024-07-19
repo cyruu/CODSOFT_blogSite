@@ -16,7 +16,7 @@ import { createTheme } from "@mui/material";
 import { ThemeProvider } from "@emotion/react";
 import CreateBlog from "./components/blog/CreateBlog";
 import Footer from "./components/Footer";
-import Search from "./pages/Search";
+import SearchPage from "./pages/SearchPage";
 import Blog from "./pages/Blog";
 import TestSearch from "./pages/TestSearch";
 const myTheme = createTheme({
@@ -35,8 +35,8 @@ function App() {
             <Navbar />
             <Routes>
               <Route path="/" element={<Home />}></Route>
-              {/* <Route path="/search" element={<TestSearch />}></Route> */}
-              <Route path="/test/:searchInput" element={<TestSearch />}></Route>
+              <Route path="/search" element={<SearchPage />}></Route>
+              {/* <Route path="/test/:searchInput" element={<TestSearch />}></Route> */}
               <Route path="/blog/:blogId" element={<Blog />}></Route>
               {/* login garepachi matra access hudaina */}
               <Route element={<PrivateRoute />}>
