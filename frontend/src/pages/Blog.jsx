@@ -8,6 +8,7 @@ import BlogComments from "../components/blog/BlogComments";
 import { useForm } from "react-hook-form";
 import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
+import { Helmet } from "react-helmet-async";
 
 const Blog = () => {
   const navigate = useNavigate();
@@ -66,6 +67,9 @@ const Blog = () => {
   }, [blogId]);
   return (
     <div className="w-[100vw] my-5 min-h-[90vh] lg:w-[80%] md:w-[90%] mx-auto md:my-10">
+      <Helmet>
+        <title>{Title}</title>
+      </Helmet>
       <Grid container className="">
         <Grid item md={8} sm={12}>
           <DetailBlog

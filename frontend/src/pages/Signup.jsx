@@ -9,6 +9,7 @@ import { useNavigate } from "react-router";
 import { NavLink } from "react-router-dom";
 import { notify } from "../utils/notify.js";
 import { ToastContainer } from "react-toastify";
+import { Helmet } from "react-helmet-async";
 
 //component
 const Signup = () => {
@@ -32,6 +33,9 @@ const Signup = () => {
   };
   return (
     <div className="h-[89vh] flex items-center justify-center">
+      <Helmet>
+        <title>Blog - Signup</title>
+      </Helmet>
       <ToastContainer />
       <form
         onSubmit={handleSubmit(submit)}

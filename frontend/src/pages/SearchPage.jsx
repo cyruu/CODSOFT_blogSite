@@ -3,6 +3,7 @@ import { useLocation } from "react-router-dom";
 import FullscreenIcon from "@mui/icons-material/Fullscreen";
 import axios from "axios";
 import SearchSingleBlog from "../components/blog/SearchSingleBlog";
+import { Helmet } from "react-helmet-async";
 const SearchPage = () => {
   const query = new URLSearchParams(useLocation().search);
   const searchInput = query.get("searchinput");
@@ -26,6 +27,9 @@ const SearchPage = () => {
   }, [searchInput]);
   return (
     <div className="w-full p-4 mx-auto min-h-[80vh] flex flex-col md:w-[80%] md:p-0 md:my-10">
+      <Helmet>
+        <title>search - {searchInput}</title>
+      </Helmet>
       <p className="mb-10">
         Search results for - <span className="font-bold">{searchInput}</span>
       </p>

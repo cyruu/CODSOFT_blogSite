@@ -7,6 +7,7 @@ import { useSelector } from "react-redux";
 
 import { useForm } from "react-hook-form";
 import ImageIcon from "@mui/icons-material/Image";
+import { Helmet } from "react-helmet-async";
 const CreateBlog = () => {
   const [preview, setPreview] = useState(null);
   const [image, setImage] = useState(null);
@@ -49,11 +50,14 @@ const CreateBlog = () => {
 
   return (
     <div className="w-full my-5 mx-auto w-[90%] px-6 md:w-[80%] p-0">
+      <Helmet>
+        <title>Blog - Create a blog</title>
+      </Helmet>
       <Breadcrumbs aria-label="breadcrumb" sx={{ marginBottom: "1rem" }}>
         <Link
           underline="hover"
           color="inherit"
-          to={`/${loggedInUser.username}`}
+          to={`/profile/${loggedInUser.username}`}
         >
           Profile
         </Link>
@@ -61,7 +65,7 @@ const CreateBlog = () => {
         <Typography color="text.primary">Create a Blog</Typography>
       </Breadcrumbs>
       <div className="buttons mb-5">
-        <Link to={`/${loggedInUser.username}`}>
+        <Link to={`/profile/${loggedInUser.username}`}>
           <Button
             variant="outlined"
             color="inherit"

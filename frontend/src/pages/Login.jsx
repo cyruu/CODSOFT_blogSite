@@ -8,6 +8,7 @@ import { ToastContainer } from "react-toastify";
 import { setLoggedInUser } from "../redux/authSlice.js";
 import axios from "axios";
 import { useDispatch } from "react-redux";
+import { Helmet } from "react-helmet-async";
 const Login = () => {
   const dis = useDispatch();
   const navigate = useNavigate();
@@ -46,6 +47,9 @@ const Login = () => {
 
   return (
     <div className="h-[89vh] flex items-center justify-center">
+      <Helmet>
+        <title>Blog - Login</title>
+      </Helmet>
       <ToastContainer />
       <form
         onSubmit={handleSubmit(submit)}

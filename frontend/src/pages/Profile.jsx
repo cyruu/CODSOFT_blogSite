@@ -3,17 +3,21 @@ import { Typography, Breadcrumbs, Button } from "@mui/material";
 import { Link } from "react-router-dom";
 import { useSelector } from "react-redux";
 import AllPosts from "../components/blog/AllPosts";
+import { Helmet } from "react-helmet-async";
 
 const Profile = () => {
   const loggedInUser = useSelector((state) => state.loggedInUser);
   return (
     <div className="w-full my-5 mx-auto w-[90%] min-h-[90vh]  md:w-[80%]">
+      <Helmet>
+        <title>Profile - {loggedInUser.username}</title>
+      </Helmet>
       <div className="profileheader px-6">
         <Breadcrumbs aria-label="breadcrumb" sx={{ marginBottom: "1rem" }}>
           <Link
             underline="hover"
             color="inherit"
-            to={`/${loggedInUser.username}`}
+            to={`/profile/${loggedInUser.username}`}
           >
             Profile
           </Link>

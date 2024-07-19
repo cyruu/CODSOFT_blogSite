@@ -8,6 +8,9 @@ const Search = ({ setSearchStatus }) => {
   const [searchInput, setSearchInput] = useState("");
   function handleSubmit(e) {
     e.preventDefault();
+    setTimeout(() => {
+      setSearchInput("");
+    }, 500);
     navigate(`/search?searchinput=${searchInput}`);
   }
   return (

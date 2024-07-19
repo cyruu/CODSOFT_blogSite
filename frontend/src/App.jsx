@@ -18,8 +18,7 @@ import CreateBlog from "./components/blog/CreateBlog";
 import Footer from "./components/Footer";
 import SearchPage from "./pages/SearchPage";
 import Blog from "./pages/Blog";
-import TestSearch from "./pages/TestSearch";
-import Cyrus from "./pages/Cyrus";
+import { Helmet, HelmetProvider } from "react-helmet-async";
 const myTheme = createTheme({
   typography: {
     button: {
@@ -30,32 +29,37 @@ const myTheme = createTheme({
 function App() {
   return (
     <>
-      <Provider store={store}>
-        <ThemeProvider theme={myTheme}>
-          <BrowserRouter>
-            <Navbar />
-            <Routes>
-              <Route path="/" element={<Home />}></Route>
-              <Route path="/search" element={<SearchPage />}></Route>
-              <Route path="/blog/:blogId" element={<Blog />}></Route>
-              {/* login garepachi matra access hudaina */}
-              <Route element={<PrivateRoute />}>
-                <Route path="/profile/:username" element={<Profile />}></Route>
-                <Route
-                  path="/:username/createblog"
-                  element={<CreateBlog />}
-                ></Route>
-              </Route>
-              {/* login garepachi access hudaina */}
-              <Route element={<PublicRoute />}>
-                <Route path="/login" element={<Login />}></Route>
-                <Route path="/signup" element={<Signup />}></Route>
-              </Route>
-            </Routes>
-            <Footer />
-          </BrowserRouter>
-        </ThemeProvider>
-      </Provider>
+      <HelmetProvider>
+        <Provider store={store}>
+          <ThemeProvider theme={myTheme}>
+            <BrowserRouter>
+              <Navbar />
+              <Routes>
+                <Route path="/" element={<Home />}></Route>
+                <Route path="/search" element={<SearchPage />}></Route>
+                <Route path="/blog/:blogId" element={<Blog />}></Route>
+                {/* login garepachi matra access hudaina */}
+                <Route element={<PrivateRoute />}>
+                  <Route
+                    path="/profile/:username"
+                    element={<Profile />}
+                  ></Route>
+                  <Route
+                    path="/profile/:username/createblog"
+                    element={<CreateBlog />}
+                  ></Route>
+                </Route>
+                {/* login garepachi access hudaina */}
+                <Route element={<PublicRoute />}>
+                  <Route path="/login" element={<Login />}></Route>
+                  <Route path="/signup" element={<Signup />}></Route>
+                </Route>
+              </Routes>
+              <Footer />
+            </BrowserRouter>
+          </ThemeProvider>
+        </Provider>
+      </HelmetProvider>
     </>
   );
 }
