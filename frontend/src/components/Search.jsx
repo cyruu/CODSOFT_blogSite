@@ -8,7 +8,7 @@ const Search = ({ setSearchStatus }) => {
   const [searchInput, setSearchInput] = useState("");
   function handleSubmit(e) {
     e.preventDefault();
-    navigate(`/${searchInput}`);
+    navigate(`/search?searchinput=${searchInput}`);
   }
   return (
     <form
