@@ -6,9 +6,12 @@ export const getInitialToken = createAsyncThunk(
   async (thunkApi) => {
     const loginToken = window.localStorage.getItem("loginToken");
     if (loginToken) {
-      const res = await axios.get("http://localhost:3000/decodeJwtToken", {
-        withCredentials: true,
-      });
+      const res = await axios.get(
+        `${import.meta.env.VITE_SERVER_ORIGIN}/decodeJwtToken`,
+        {
+          withCredentials: true,
+        }
+      );
 
       return res.data.decodedToken;
     }
