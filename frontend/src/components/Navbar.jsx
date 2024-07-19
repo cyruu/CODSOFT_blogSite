@@ -62,7 +62,7 @@ const Navbar = () => {
         {loggedInUser ? (
           <ul className="login-links flex justify-center h-full">
             <NavLink
-              to={`/${loggedInUser.username}`}
+              to={`/profile/${loggedInUser.username}`}
               className={({ isActive }) =>
                 `${
                   isActive ? "border-b-4 border-black text-black " : ""

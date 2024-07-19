@@ -19,6 +19,7 @@ import Footer from "./components/Footer";
 import SearchPage from "./pages/SearchPage";
 import Blog from "./pages/Blog";
 import TestSearch from "./pages/TestSearch";
+import Cyrus from "./pages/Cyrus";
 const myTheme = createTheme({
   typography: {
     button: {
@@ -38,9 +39,10 @@ function App() {
               <Route path="/search" element={<SearchPage />}></Route>
               <Route path="/test/:searchInput" element={<TestSearch />}></Route>
               <Route path="/blog/:blogId" element={<Blog />}></Route>
+              <Route path="/cyrus" element={<Cyrus />}></Route>
               {/* login garepachi matra access hudaina */}
               <Route element={<PrivateRoute />}>
-                <Route path="/:username" element={<Profile />}></Route>
+                <Route path="/profile/:username" element={<Profile />}></Route>
                 <Route
                   path="/:username/createblog"
                   element={<CreateBlog />}
