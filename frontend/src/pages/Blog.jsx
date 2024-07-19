@@ -59,7 +59,7 @@ const Blog = () => {
           blogId,
         }
       );
-      window.location.reload();
+
       navigate(`/blog/${blogId}`);
     } catch (error) {
       console.log(error);
