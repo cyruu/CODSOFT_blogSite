@@ -15,6 +15,7 @@ const Blog = () => {
   const location = useLocation();
   const { blogId } = useParams();
   const [Title, setTitle] = useState(null);
+  const [comment, setComment] = useState("");
   const [Image, setImage] = useState(null);
   const [Month, setMonth] = useState(null);
   const [Day, setDay] = useState(null);
@@ -59,7 +60,9 @@ const Blog = () => {
           blogId,
         }
       );
-
+      setTimeout(() => {
+        setComment("");
+      }, 400);
       navigate(`/blog/${blogId}`);
     } catch (error) {
       console.log(error);
@@ -110,6 +113,8 @@ const Blog = () => {
                     message: "Comment must be at least 15 characters.",
                   },
                 })}
+                value={comment}
+                onChange={({ target }) => setComment(target.value)}
               ></textarea>
               {errors.comment ? (
                 <p className="text-xs mt-1 text-red-600">
