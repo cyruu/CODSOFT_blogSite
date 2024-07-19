@@ -1,7 +1,7 @@
 import { Button, Grid, Paper, Typography } from "@mui/material";
 import axios from "axios";
 import React, { useEffect, useState } from "react";
-import { useNavigate, useParams } from "react-router";
+import { useLocation, useNavigate, useParams } from "react-router";
 import DetailBlogSidebar from "../components/blog/DetailBlogSidebar";
 import DetailBlog from "../components/blog/DetailBlog";
 import BlogComments from "../components/blog/BlogComments";
@@ -12,6 +12,7 @@ import { Helmet } from "react-helmet-async";
 
 const Blog = () => {
   const navigate = useNavigate();
+  const location = useLocation();
   const { blogId } = useParams();
   const [Title, setTitle] = useState(null);
   const [Image, setImage] = useState(null);
@@ -24,6 +25,7 @@ const Blog = () => {
   const loggedInUser = useSelector((state) => state.loggedInUser);
   const { register, handleSubmit, formState } = useForm();
   const { errors } = formState;
+
   const getBlog = async () => {
     setLoading(true);
     const res = await axios.post(
@@ -58,6 +60,7 @@ const Blog = () => {
         }
       );
       window.location.reload();
+      navigate(`/blog/${blogId}`);
     } catch (error) {
       console.log(error);
     }
@@ -66,7 +69,10 @@ const Blog = () => {
     getBlog();
   }, [blogId]);
   return (
-    <div className="w-[100vw] my-5 min-h-[90vh] lg:w-[80%] md:w-[90%] mx-auto md:my-10">
+    <div
+      className="w-[100vw] my-5 min-h-[90vh] lg:w-[80%] md:w-[90%] mx-auto md:my-10"
+      key={location.key}
+    >
       <Helmet>
         <title>{Title}</title>
       </Helmet>
