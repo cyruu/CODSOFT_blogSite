@@ -32,11 +32,6 @@
       "src": "/api/(.*)",
       "dest": "/backend/server.js"
     },
-
-    {
-      "src": "/search",
-      "dest": "/frontend/src/App.jsx"
-    },
     {
       "src": "/(.*)",
       "dest": "/frontend/$1"
