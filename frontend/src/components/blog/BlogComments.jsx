@@ -11,7 +11,7 @@ const BlogComments = ({ blogId }) => {
         blogId,
       }
     );
-
+    // redis?
     setAllComments(res.data.comments);
   };
   useEffect(() => {
