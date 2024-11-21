@@ -10,8 +10,8 @@ import ImageIcon from "@mui/icons-material/Image";
 import { Helmet } from "react-helmet-async";
 const CreateBlog = () => {
   const [preview, setPreview] = useState(null);
-  const [image, setImage] = useState(null);
   const navigate = useNavigate();
+  const [image, setImage] = useState(null);
   const { register, handleSubmit, formState } = useForm();
   const { errors } = formState;
   const loggedInUser = useSelector((state) => state.loggedInUser);
@@ -144,7 +144,7 @@ const CreateBlog = () => {
           )}
         </Paper>
         {/* image file */}
-        <Paper className="mb-5 md:p-0" elevation={0}>
+          <Paper className="mb-5 md:p-0" elevation={0}>
           <Typography
             variant="body1"
             sx={{ fontWeight: "bold", fontSize: "1rem" }}
