@@ -15,7 +15,9 @@ const CreateBlog = () => {
   const { register, handleSubmit, formState } = useForm();
   const { errors } = formState;
   const loggedInUser = useSelector((state) => state.loggedInUser);
+  const [loading, setloading] = useState(false);
   const submit = async (data) => {
+    setloading(true);
     const formData = new FormData();
 
     formData.append("title", data.title);
@@ -35,8 +37,9 @@ const CreateBlog = () => {
         },
       }
     );
+    setloading(false);
     if (res.data.success) {
-      navigate(`/${loggedInUser.username}`);
+      navigate(`/profile/${loggedInUser.username}`);
     }
   };
   const handleImageChange = (e) => {
@@ -144,7 +147,7 @@ const CreateBlog = () => {
           )}
         </Paper>
         {/* image file */}
-          <Paper className="mb-5 md:p-0" elevation={0}>
+        <Paper className="mb-5 md:p-0" elevation={0}>
           <Typography
             variant="body1"
             sx={{ fontWeight: "bold", fontSize: "1rem" }}
@@ -223,9 +226,15 @@ const CreateBlog = () => {
             ""
           )}
         </Paper>
-        <Button type="submit" variant="contained" disableElevation>
-          Create
-        </Button>
+        {loading ? (
+          <Button disabled variant="contained" disableElevation>
+            Creating...
+          </Button>
+        ) : (
+          <Button type="submit" variant="contained" disableElevation>
+            Create
+          </Button>
+        )}
       </form>
     </div>
   );
